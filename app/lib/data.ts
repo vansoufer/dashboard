@@ -11,6 +11,7 @@ import {
   ProductsTableType
 } from './definitions';
 import { formatCurrency } from './utils';
+import { promise } from 'zod';
 
 export async function fetchRevenue() {
   try {
@@ -87,6 +88,7 @@ export async function fetchCardData() {
 }
 
 const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE_DISPLAY = 12;
 export async function fetchFilteredInvoices(
   query: string,
   currentPage: number,
@@ -278,8 +280,9 @@ export async function fetchProducts() {
   }
 }
 
-export async function fetchFilteredProducts(query: string,currentPage: number) {
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+export async function fetchFilteredProducts(query: string,currentPage: number, itemsPerPage: number) {
+  const limit = itemsPerPage;
+  const offset = (currentPage - 1) * limit;
   try {
     const data = await sql<ProductsTableType>`
 		SELECT *
@@ -289,7 +292,7 @@ export async function fetchFilteredProducts(query: string,currentPage: number) {
       products.type ILIKE ${`%${query}%`}
 		GROUP BY products.id, products.name, products.storage, products.image_url, products.price, products.status, products.type
 		ORDER BY products.name ASC
-    LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+    LIMIT ${limit} OFFSET ${offset}
 	  `;
 
     const products = data.rows.map((product) => ({
@@ -303,7 +306,7 @@ export async function fetchFilteredProducts(query: string,currentPage: number) {
   }
 }
 
-export async function fetchProductsPages(query: string) {
+export async function fetchProductsPages(query: string, itemsPerPage: number) {
   try {
     const count = await sql`SELECT COUNT(*)
     FROM products
@@ -312,10 +315,28 @@ export async function fetchProductsPages(query: string) {
       products.type ILIKE ${`%${query}%`} 
   `;
 
-    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    const limit = itemsPerPage;
+    const totalPages = Math.ceil(Number(count.rows[0].count) / limit);
     return totalPages;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch total number of products.');
+  }
+}
+
+export async function fetchCardProductsData() {
+  try {
+    // You can probably combine these into a single SQL query
+    // However, we are intentionally splitting them to demonstrate
+    // how to initialize multiple queries in parallel with JS.
+   
+    const numberOfProducts = await sql`SELECT COUNT(*) FROM products`;
+
+    return {
+      numberOfProducts,
+    };
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch card data.');
   }
 }

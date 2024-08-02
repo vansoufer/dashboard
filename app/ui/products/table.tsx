@@ -6,11 +6,13 @@ import { fetchFilteredProducts } from '@/app/lib/data';
 export default async function ProductsTable({
   query,
   currentPage,
+  itemsPerPage,
 }: {
   query: string;
   currentPage: number;
+  itemsPerPage: number;
 }) {
-  const products = await fetchFilteredProducts(query, currentPage);
+  const products = await fetchFilteredProducts(query, currentPage, itemsPerPage);
 
   return (
     <div className="mt-6 flow-root">

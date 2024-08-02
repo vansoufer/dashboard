@@ -22,7 +22,9 @@ export default async function Page({
 }) {
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
-  const totalPages = await fetchProductsPages(query);
+  const itemsPerPage = 6;
+  const totalPages = await fetchProductsPages(query,itemsPerPage);
+  
 
   return (
     <div className="w-full">
@@ -34,7 +36,7 @@ export default async function Page({
         <CreateProduct />
       </div>
       <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
-        <Table query={query} currentPage={currentPage} />
+        <Table query={query} currentPage={currentPage} itemsPerPage={itemsPerPage} />
       </Suspense> 
       <div className="mt-5 flex w-full justify-center">
         <Pagination totalPages={totalPages} /> 
