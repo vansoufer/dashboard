@@ -144,4 +144,89 @@ const revenue = [
   { month: 'Dec', revenue: 4800 },
 ];
 
-export { users, customers, invoices, revenue };
+const products = [
+  {//product_id, storage, name, image_url, status, price
+    id: '13D07535-C12E-4157-A011-F8D2EF4E0CBB',
+    storage: 20,
+    name: 'Sneaker',
+    image_url: '/products/allstar.png',
+    status: true,
+    price: 1526,
+    type: 'shoes',
+  },
+  {
+    id: '13D07535-C13E-4157-A011-F8D2EF4E0CBB',
+    storage: 20,
+    name: 'Dress',
+    image_url: '/products/dress-1.png',
+    status: true,
+    price: 25689,
+    type: 'clothes',
+  },
+  {
+    id: '13D07535-C14E-4157-A011-F8D2EF4E0CBB',
+    storage: 20,
+    name: 'Dress',
+    image_url: '/products/dress-2.png',
+    status: true,
+    price: 25689,
+    type: 'clothes',
+  },
+  {
+    id: '13D07535-C15E-4157-A011-F8D2EF4E0CBB',
+    storage: 20,
+    name: 'Handbag',
+    image_url: '/products/handbag.png',
+    status: true,
+    price: 18986,
+    type: 'accessories',
+  },
+  {
+    id: '13D07535-C16E-4157-A011-F8D2EF4E0CBB',
+    storage: 20,
+    name: 'Purse',
+    image_url: '/products/purse.png',
+    status: true,
+    price: 18986,
+    type: 'accessories',
+  },
+  {
+    id: '13D07535-C17E-4157-A011-F8D2EF4E0CBB',
+    storage: 20,
+    name: 'Sunglasses',
+    image_url: '/products/sunglass-1.png',
+    status: true,
+    price: 18986,
+    type: 'accessories',
+  },
+  {
+    id: '13D07535-C18E-4157-A011-F8D2EF4E0CBB',
+    storage: 20,
+    name: 'Sunglasses',
+    image_url: '/products/sunglass-2.png',
+    status: true,
+    price: 18986,
+    type: 'accessories',
+  },
+  {
+    id: '13D07535-C19E-4157-A011-F8D2EF4E0CBB',
+    storage: 20,
+    name: 'Sweeter',
+    image_url: '/products/sweeter.png',
+    status: true,
+    price: 25689,
+    type: 'clothes',
+  },
+  {
+    id: '13D07535-C20E-4157-A011-F8D2EF4E0CBB',
+    storage: 20,
+    name: 'Watch',
+    image_url: '/products/watch.png',
+    status: true,
+    price: 18986,
+    type: 'accessories',
+  },
+];
+
+
+export { users, customers, invoices, revenue, products };

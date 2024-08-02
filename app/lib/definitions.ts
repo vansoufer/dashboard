@@ -80,9 +80,39 @@ export type CustomerField = {
   name: string;
 };
 
+export type ProductsField = {
+  id: string;
+  name: string;
+  image_url: string;
+  storage: number;
+  price: number;
+  type: string;
+  status: boolean;
+};
+
 export type InvoiceForm = {
   id: string;
   customer_id: string;
   amount: number;
   status: 'pending' | 'paid';
+};
+
+export type ProductForm = {
+  id: string;
+  name: string;
+  image_url: string;
+  storage: number;
+  price: number;
+  type: string;
+  status: boolean;
+};
+
+export type ProductsTableType = {
+  id: string;
+  name: string;
+  storage: number;
+  image_url: string;
+  price: number;
+  status: boolean;
+  type: string;
 };
